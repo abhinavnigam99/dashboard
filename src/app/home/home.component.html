@@ -1,0 +1,189 @@
+<div class='contain'>
+    <div style="display: flex;align-items: center;margin:10px">
+        <span class="material-icons">star_outline</span>
+        <div class="bottom-item">
+            <mat-icon aria-hidden="false" aria-label="discussion icon">person</mat-icon>
+            <span>6 People</span>
+        </div>
+        <div class="bottom-item" style="background-color: orange;">
+            <mat-icon aria-hidden="false" aria-label="discussion icon">schedule</mat-icon>
+            <span>2 Days Left</span>
+        </div>
+        <span class="spacer"></span>
+        <mat-slide-toggle style="background-color: darkgray;border-radius: 2px; padding-left:4px ; padding-right: 4px;">Show my task only</mat-slide-toggle>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="drag-container">
+                <div class="section-heading">To Do</div>
+                <div cdkDropList #toDoList="cdkDropList" [cdkDropListData]="toDo"
+                    [cdkDropListConnectedTo]="[inReviewList,inProgressList,doneList]" class="item-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="item-box" *ngFor="let item of toDo" cdkDrag>
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>{{item.title}}</mat-card-title>
+                            </mat-card-header>
+                            <img *ngIf="item.imagePath!=''" mat-card-image [src]='item.imagePath' alt="Photo">
+                            <mat-card-content>
+                                <div style="display: flex;">
+                                    <div class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">notifications_none
+                                        </mat-icon>
+                                        <span>{{item.date | date:'MMM, d'}}</span>
+                                    </div>
+                                    <div *ngIf="item.attachments>0" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="attach icon">attach_file
+                                        </mat-icon>
+                                        <span>{{item.attachments}}</span>
+                                    </div>
+                                    <div *ngIf="item.discussion>0" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">chat_bubble_outline
+                                        </mat-icon>
+                                        <span>{{item.discussion}}</span>
+                                    </div>
+                                    <span class="spacer"></span>
+                                    <div *ngFor="let people of item.user" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">portrait
+                                        </mat-icon>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="drag-container">
+                <div class="section-heading">In Progress</div>
+
+                <div cdkDropList #inProgressList="cdkDropList" [cdkDropListData]="inProgress"
+                    [cdkDropListConnectedTo]="[toDoList,inReviewList,doneList]" class="item-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="item-box" *ngFor="let item of inProgress" cdkDrag>
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>{{item.title}}</mat-card-title>
+                            </mat-card-header>
+                            <img *ngIf="item.imagePath!=''" mat-card-image [src]='item.imagePath' alt="Photo">
+                            <mat-card-content>
+                                <div style="display: flex;">
+                                    <div class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">notifications_none
+                                        </mat-icon>
+                                        <span>{{item.date | date:'MMM, d'}}</span>
+                                    </div>
+                                    <div *ngIf="item.attachments>0" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="attach icon">attach_file
+                                        </mat-icon>
+                                        <span>{{item.attachments}}</span>
+                                    </div>
+                                    <div *ngIf="item.discussion>0" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">chat_bubble_outline
+                                        </mat-icon>
+                                        <span>{{item.discussion}}</span>
+                                    </div>
+                                    <span class="spacer"></span>
+                                    <div *ngFor="let people of item.user" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">portrait
+                                        </mat-icon>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="drag-container">
+                <div class="section-heading">In Review</div>
+
+                <div cdkDropList #inReviewList="cdkDropList" [cdkDropListData]="inReview"
+                    [cdkDropListConnectedTo]="[toDoList,inProgressList,doneList]" class="item-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="item-box" *ngFor="let item of inReview" cdkDrag>
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>{{item.title}}</mat-card-title>
+                            </mat-card-header>
+                            <img *ngIf="item.imagePath!=''" mat-card-image [src]='item.imagePath'
+                                alt="Photo of a {{item.title}}">
+                            <mat-card-content>
+                                <div style="display: flex;">
+                                    <div class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">notifications_none
+                                        </mat-icon>
+                                        <span>{{item.date | date:'MMM, d'}}</span>
+                                    </div>
+                                    <div *ngIf="item.attachments>0" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="attach icon">attach_file
+                                        </mat-icon>
+                                        <span>{{item.attachments}}</span>
+                                    </div>
+                                    <div *ngIf="item.discussion>0" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">chat_bubble_outline
+                                        </mat-icon>
+                                        <span>{{item.discussion}}</span>
+                                    </div>
+                                    <span class="spacer"></span>
+                                    <div *ngFor="let people of item.user" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">portrait
+                                        </mat-icon>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="drag-container">
+                <div class="section-heading">Done</div>
+
+                <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done"
+                    [cdkDropListConnectedTo]="[toDoList,inProgressList,inReviewList]" class="item-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="item-box" *ngFor="let item of done" cdkDrag>
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>{{item.title}}</mat-card-title>
+                            </mat-card-header>
+                            <img *ngIf="item.imagePath!=''" mat-card-image [src]='item.imagePath'
+                                alt="Photo of a {{item.title}}">
+                            <mat-card-content>
+                                <div style="display: flex;">
+                                    <div class="bottom-item" style="background-color: green;color: white;">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">done
+                                        </mat-icon>
+                                        <span>{{item.date | date:'MMM, d'}}</span>
+                                    </div>
+                                    <div *ngIf="item.attachments>0" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="attach icon">attach_file
+                                        </mat-icon>
+                                        <span>{{item.attachments}}</span>
+                                    </div>
+                                    <div *ngIf="item.discussion>0" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">chat_bubble_outline
+                                        </mat-icon>
+                                        <span>{{item.discussion}}</span>
+                                    </div>
+                                    <span class="spacer"></span>
+                                    <div *ngFor="let people of item.user" class="bottom-item">
+                                        <mat-icon aria-hidden="false" aria-label="discussion icon">portrait
+                                        </mat-icon>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button mat-fab color="primary" class="fixedbutton" aria-label="icon button for add" (click)="openModal()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>

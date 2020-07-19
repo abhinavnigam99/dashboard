@@ -1,0 +1,94 @@
+.section-heading {
+  padding: 5px 10px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.drag-container {
+  width: 400px;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #E9ECEF;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.item-list {
+  min-height: 60px;
+  border-radius: 4px;
+  display: block;
+}
+
+.item-box {
+  margin-bottom: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  font-size: 14px;
+  border-radius: 12px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.item-list.cdk-drop-list-dragging .item-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.bottom-item {
+  background-color: lightgray;
+  border-radius: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  align-self: center;
+  display: flex;
+  margin-right: 4px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.contain {
+  margin-left: 50px;
+}
+
+mat-card {
+  padding: 4px;
+  background: white;
+  color: black;
+}
+
+.mat-card-image {
+  width: calc(100%);
+  margin: 0px 0px 4px 0px;
+  padding: 0px 4px 4px 4px;
+}
+
+mat-card-header {
+  margin-bottom: 12px;
+  border-left: 2px solid;
+}
+
+.fixedbutton {
+  position: fixed;
+  bottom: 50px;
+  right: 50px; 
+}
